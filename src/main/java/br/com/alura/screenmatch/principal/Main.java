@@ -3,12 +3,15 @@ package br.com.alura.screenmatch.principal;
 import br.com.alura.screenmatch.model.DadosEpisodio;
 import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.DadosTemporada;
+import br.com.alura.screenmatch.model.Episodio;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.sql.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     Scanner sc = new Scanner(System.in);
@@ -42,5 +45,43 @@ public class Main {
 
         // Lambda para adaptar o for acima
         temporadas.forEach(t -> t.Episodios().forEach(e -> System.out.println(e.Titulo())));
+
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+                .flatMap(t -> t.Episodios().stream())
+                        .collect(Collectors.toList());
+
+        System.out.println("\nTop 5 episódios: ");
+        dadosEpisodios.stream()
+                .filter(e -> !e.Avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::Avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);
+
+        // Todos os episódios
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.Episodios().stream()
+                        .map(d -> new Episodio(t.NumeroTemporada(), d))
+                ).collect(Collectors.toList());
+
+        System.out.println("\nTodos os episódios:");
+        episodios.forEach(System.out::println);
+
+        System.out.print("\nA partir de que ano você deseja ver os episódios? ");
+        var ano = sc.nextInt();
+        sc.nextLine();
+
+        LocalDate dataBusca = LocalDate.of(ano, 1, 1);
+
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.println("\nEpisódios na data " + dataBusca);
+        episodios.stream()
+                .filter(e -> e != null && e.getDataLancamento().isAfter(dataBusca))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getTemporada() +
+                                " Episódio: " + e.getTitulo() +
+                                " Data Lançamento: " + e.getDataLancamento().format(formatador)
+                ));
+
     }
 }
