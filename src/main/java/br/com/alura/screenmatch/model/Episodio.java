@@ -16,15 +16,15 @@ public class Episodio {
     // Constructor
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.temporada = numeroTemporada;
-        this.titulo = dadosEpisodio.Titulo();
-        this.numeroEpisodio = dadosEpisodio.NumeroEpisodio();
+        this.titulo = dadosEpisodio.titulo();
+        this.numeroEpisodio = dadosEpisodio.numero();
         try {
-            this.avaliacao = Double.valueOf(dadosEpisodio.Avaliacao());
+            this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
         } catch (NumberFormatException e) {
             this.avaliacao = 0.0;
         }
         try {
-            this.dataLancamento = LocalDate.parse(dadosEpisodio.DataLancamento());
+            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
         } catch (DateTimeException e) {
             this.dataLancamento = null;
         }

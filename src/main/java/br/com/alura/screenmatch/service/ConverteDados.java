@@ -9,7 +9,7 @@ public class ConverteDados implements IConverteDados {
 
     @Override
     //<T> T: classe genérica
-    public <T> T converterDados(String json, Class<T> classe) {
+    public <T> T obterDados(String json, Class<T> classe) {
         try {
             // readValue: converter JSON para objeto Java
             return mapper.readValue(json, classe);
