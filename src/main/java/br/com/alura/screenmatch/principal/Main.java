@@ -61,11 +61,16 @@ public class Main {
     }
 
     private DadosSerie getDadosSerie() {
-        System.out.println("Digite o nome da série para busca");
-        var nomeSerie = sc.nextLine();
-        var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
-        DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-        return dados;
+        try {
+            System.out.println("Digite o nome da série para busca");
+            var nomeSerie = sc.nextLine();
+            var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
+            DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+            return dados;
+        } catch (Exception e) {
+            System.out.println("Falha na conexão: " + e.getMessage());
+            return null;
+        }
     }
 
     private void buscarEpisodioPorSerie(){
