@@ -68,7 +68,7 @@ public class Main {
         DadosSerie dados = getDadosSerie();
         Serie serie = new Serie(dados);
         repositorio.save(serie);
-        System.out.println(dados);
+        System.out.println("Série encontrada: " + dados);
     }
 
     private DadosSerie getDadosSerie() {
@@ -97,12 +97,10 @@ public class Main {
     }
 
     private void listarSeriesBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream()
-                        .map(d -> new Serie(d))
-                                .collect(Collectors.toList());
+        // Buscar series no BD
+        List<Serie> series = repositorio.findAll();
         series.stream()
-                        .sorted(Comparator.comparing(Serie::getGenero))
-                                .forEach(System.out::println);
+                .sorted(Comparator.comparing(Serie::getGenero))
+                .forEach(System.out::println);
     }
 }

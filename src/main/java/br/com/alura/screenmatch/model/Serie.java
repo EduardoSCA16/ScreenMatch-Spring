@@ -29,6 +29,8 @@ public class Serie {
     @Transient // Significa um "por enquanto não precisa mexer nisso"
     private List<Episodio> episodios = new ArrayList<>();
 
+    // Constructor
+    public Serie() {}
     public Serie(DadosSerie dadosSerie) {
         this.titulo = dadosSerie.titulo();
         this.totalTemporadas = dadosSerie.totalTemporadas();
