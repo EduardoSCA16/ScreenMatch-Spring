@@ -42,8 +42,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Inserindo o Jackson nas dependências do projeto -->
-		<!-- Source: https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>tools.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -51,7 +49,16 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- MyMemory -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
