@@ -26,7 +26,7 @@ public class Serie {
     private String atores;
     private String poster;
     private String sinopse;
-    @Transient // Significa um "por enquanto não precisa mexer nisso"
+    @OneToMany(mappedBy = "serie")
     private List<Episodio> episodios = new ArrayList<>();
 
     // Constructor
