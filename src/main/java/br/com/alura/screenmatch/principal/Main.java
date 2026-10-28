@@ -180,7 +180,7 @@ public class Main {
         var qtdTemp = sc.nextInt();
         System.out.print("\nAvaliações a partir de: ");
         var avalicao = sc.nextDouble();
-        List<Serie> seriesEncontradas = repositorio.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(qtdTemp, avalicao);
+        List<Serie> seriesEncontradas = repositorio.seriesPorTemporadaEAvaliacao(qtdTemp, avalicao);
         seriesEncontradas.forEach(System.out::println);
     }
 }
